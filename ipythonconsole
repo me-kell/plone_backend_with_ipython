@@ -1,0 +1,18 @@
+#!/app/bin/python
+# -*- coding: utf-8 -*-
+import sys
+import IPython
+#from Zope2.Startup.run import make_wsgi_app
+import Zope2
+
+if __name__ == '__main__':
+    global_config = {}
+    zope_conf = sys.argv[1]
+    Zope2.Startup.run.make_wsgi_app(global_config, zope_conf)
+    app = Zope2.app()
+    banner1 = (
+        f'Starting IPython {IPython.__version__} '
+        f'with zope_conf="{zope_conf}" and global_config="{global_config}"'
+    )
+    banner2 = f'The name "app" is bound to the top-level Zope object "{app}"'
+    sys.exit(IPython.embed(colors="pride", banner1=banner1, banner2=banner2))
