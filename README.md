@@ -41,8 +41,7 @@ zeo            plone/plone-zeo:6.0.0                  "/app/start-zeo.sh"      z
 ```console
 $ docker exec -e SITE_ID="Plone" my_container ./docker-entrypoint.sh create-classic
 INFO:Plone Site Creation:Creating a new Plone site  @ Plone
-INFO:Plone Site Creation: - Using the classic distribution and answers from /app/scripts/default.json
-INFO:Plone Site Creation: - Stopping site creation, as there is already a site with id Plone. Set DELETE_EXISTING=1 to delete the existing site before creating a new one.
+...
 INFO:Plone Site Creation: - Site created!
 ```
 
