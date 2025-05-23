@@ -46,14 +46,27 @@ INFO:Plone Site Creation: - Stopping site creation, as there is already a site w
 INFO:Plone Site Creation: - Site created!
 ```
 
+## Start ipythonconsole
+
+```console
+$ docker exec -it my_container ./docker-entrypoint.sh ipythonconsole
+Starting IPython 9.2.0 with zope_conf="etc/zeo.conf" and global_config="{}"
+The name "app" is bound to the top-level Zope object "<Application at >"
+In [1]: app.Plone.title
+Out[1]: 'Plone Site'
+In [2]: app.Plone.title = "New Title"
+In [3]: import transaction
+In [4]: transaction.commit()
+In [5]: exit
+```
 ## Inspect the IP-addresses of the running containers
 
 ```bash
 for i in $(docker container ls --format '{{.Names}}' -a);
-    do echo "$i $(docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $i)";
+    do echo "for '$i' visit 'http://$(docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $i)'";
 done
 ```
 ```console
-my_container 172.23.0.3
-zeo 172.23.0.2
+for 'my_container' visit 'http://172.23.0.3'
+for 'zeo' visit 'http://172.23.0.2'
 ```
