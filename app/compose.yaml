@@ -1,0 +1,21 @@
+services:
+  backend_with_ipython:
+    build:
+      context: app
+      target: builder
+    image: plone-server-dev-with-ipython:latest
+    container_name: my_container
+    environment:
+      ZEO_ADDRESS: zeo:8100
+    ports: [ "8080:8080" ]
+    depends_on: [ zeo ]
+
+  zeo:
+    image: plone/plone-zeo:6.0.0
+    container_name: zeo
+    restart: always
+    volumes: [ data:/data ]
+    ports: [ "8100:8100" ]
+
+volumes:
+  data: {}
