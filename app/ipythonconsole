@@ -2,13 +2,13 @@
 # -*- coding: utf-8 -*-
 import sys
 import IPython
-#from Zope2.Startup.run import make_wsgi_app
 import Zope2
+from Zope2.Startup.run import make_wsgi_app
 
 if __name__ == '__main__':
     global_config = {}
     zope_conf = sys.argv[1]
-    Zope2.Startup.run.make_wsgi_app(global_config, zope_conf)
+    make_wsgi_app(global_config, zope_conf)
     app = Zope2.app()
     banner1 = (
         f'Starting IPython {IPython.__version__} '
